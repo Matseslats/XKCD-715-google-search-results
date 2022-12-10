@@ -6,6 +6,10 @@ start = int(start)
 stop = int(stop)
 step = int(step)
 
+progBarWidth = 70
+rollsPerBar = int(stop-start/progBarWidth)
+barsToDraw = 0
+
 graphY = []
 graphX = []
 
@@ -14,10 +18,13 @@ for i in range(start, stop+1, step):
     response = GoogleSearch().search(term)
     graphY.append(response.total)
     graphX.append(i)
-    print(term, response.total)
+
+    barsToDraw = int(((i-start) / (1+stop-start))*progBarWidth)
+    print("\rProgress: |%s%s| %s" % ("#"*barsToDraw, "-"*(progBarWidth-barsToDraw-1), term), end="")
+print()
 
 
-plt.ylabel('')
+plt.ylabel("frequency")
 
 # linear
 plt.plot(graphX,graphY)
