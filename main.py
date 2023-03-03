@@ -23,13 +23,14 @@ for i in range(start, stop+1, step):
     print("\rProgress: |%s%s| %s" % ("#"*barsToDraw, "-"*(progBarWidth-barsToDraw-1), term), end="")
 print()
 
+with plt.xkcd():
+    plt.ylabel("frequency")
 
-plt.ylabel("frequency")
+    # linear
+    plt.plot(graphX,graphY)
+    plt.yscale('linear')
+    plt.title(searchTerm.replace("%d", "x"))
+    plt.grid(True)
 
-# linear
-plt.plot(graphX,graphY)
-plt.yscale('linear')
-plt.title(searchTerm.replace("%d", "x"))
-plt.grid(True)
 
-plt.show()
+    plt.show()
